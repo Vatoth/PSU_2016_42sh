@@ -5,7 +5,7 @@
 ## Login   <TomicNikola@epitech.net>
 ##
 ## Started on  Sat Oct 15 19:37:46 2016 Nikola Tomic
-## Last update Fri May 19 17:43:48 2017 Léandre Blanchard
+## Last update Fri May 19 22:49:30 2017 
 ##
 
 CPPFLAGS	+= -I./include/ -g -g3
@@ -17,6 +17,7 @@ CFLAGS	+= -Wall -Wextra
 SRC	= src/builtins.c		\
 	  src/find_path.c		\
 	  src/free.c			\
+	  src/alias.c			\
 	  src/tab_append.c		\
 	  src/builtin_signal.c		\
 	  src/cursor.c			\
