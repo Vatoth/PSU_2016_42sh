@@ -1,11 +1,11 @@
 /*
-1;4803;0c1;4803;0c** shell.c for 42sh in /home/leandre/System_unix/PSU_2016_42sh/src
+** shell.c for 42sh in /home/leandre/System_unix/PSU_2016_42sh/src
 **
 ** Made by Léandre Blanchard
 ** Login   <leandre.blanchard@epitech.eu>
 **
 ** Started on  Sun May 14 23:44:43 2017 Léandre Blanchard
-** Last update Fri May 19 21:45:21 2017 
+** Last update Sat May 20 00:39:47 2017 
 */
 
 #include <pwd.h>
@@ -81,20 +81,11 @@ static int             check_env(t_list *dupenvp, char *var)
   return (1);
 }
 
-int             recreate_env(t_list **dupenvp)
+int		recreate_path(t_list **dupenvp, char *s)
 {
-  char          *s;
+  size_t	n;
   char		*prev;
-  size_t        n;
-
-  if (check_env(*dupenvp, "USER") == 1)
-    {
-      if ((s = my_catalloc("USER=", getpwuid(getuid())->pw_name, NULL)) == NULL)
-        return (1);
-      setenv("USER", getpwuid(getuid())->pw_name, 1);
-      put_in_list(dupenvp, s);
-      free(s);
-    }
+  
   if (check_env(*dupenvp, "PATH") == 1)
     {
       n = confstr(_CS_PATH, NULL, (size_t)0);
@@ -109,6 +100,24 @@ int             recreate_env(t_list **dupenvp)
       free(s);
       free(prev);
     }
+  return (0);
+}
+
+int             recreate_env(t_list **dupenvp)
+{
+  char          *s;
+
+  if (check_env(*dupenvp, "USER") == 1)
+    {
+      if ((s = my_catalloc("USER=",
+			   getpwuid(getuid())->pw_name, NULL)) == NULL)
+        return (1);
+      setenv("USER", getpwuid(getuid())->pw_name, 1);
+      put_in_list(dupenvp, s);
+      free(s);
+    }
+  if (recreate_path(dupenvp, s) == 1)
+    return (1);
   return (0);
 }
 

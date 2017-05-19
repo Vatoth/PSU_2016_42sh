@@ -1,11 +1,11 @@
 /*
-1;4803;0c** alias.c for  in /home/vatoth/Epitech/PSU_2016_42sh
+** alias.c for  in /home/vatoth/Epitech/PSU_2016_42sh
 ** 
 ** Made by 
 ** Login   <quentin.sonnefraud@epitech.eu>
 ** 
 ** Started on  Fri May 19 17:08:22 2017 
-** Last update Fri May 19 22:56:56 2017 
+** Last update Sat May 20 00:33:24 2017 
 */
 
 #include <string.h>
@@ -24,6 +24,10 @@ typedef struct		s_list_al
   char			**file;
   struct s_alias	*first;
 }			t_list_al;
+
+int		add_alias(t_list_al *alias)
+{
+}
 
 char		*replace_alias(char *cmd, t_list_al *alias)
 {
