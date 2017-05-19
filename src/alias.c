@@ -5,8 +5,10 @@
 ** Login   <quentin.sonnefraud@epitech.eu>
 ** 
 ** Started on  Fri May 19 17:08:22 2017 
-** Last update Fri May 19 20:11:04 2017 
+** Last update Fri May 19 22:40:52 2017 
 */
+
+#include <string.h>
 
 typedef struct	s_alias
 {
@@ -21,39 +23,32 @@ typedef struct	s_list_al
   struct s_list	*first;
 }		t_list_al;
 
-int		replace(char **tab, char *alias)
-{
-  free(tab[0]);
-  tab[0] = my_strdup(alias);
-  return (0);
-}
 
-int		replace_alias(char **cmd, t_list_al *alias)
+int		replace_alias(char *cmd, t_list_al *alias)
 {
   int		i;
   t_alias	tmp;
+  char		*new_cmd;
 
   i = 0;
-  while (tab[i])
+  tmp = alias->first;
+  new_cmd = cmd;
+  while (alias->next)
     {
-      tmp = alias->first;
-      while (alias->next)
+      if (strncmp(cmd, tmp->alias, strlen(tmp->alias)) == 0)
 	{
-	  if (strcmp(tab[i], tmp->alias) == 0)
-	    if (replace(&tab[i], al) == 1)
-	      return (0);
+	  if (cmd[strlen(tmp->alias)] == '\0' || cmd[strlen(tmp->alias)] == ' ')
+	    {
+	      if ((new_cmd = my_strcat(alias, &cmd[strlen(alias)]) != NULL))
+		{
+		  free(cmd);
+		  return (new_cmd);
+		}
+	      else
+		return (NULL);
+	    }
+	  
 	}
-      tmp = 
     }
-}
-
-int		init_alias()
-{
-  int		fd;
-
-  if ((fd= open("~/.42shrc", O_RDONLY)) == -1)
-    {
-      if ((fd = open("~/.42shrc", O_CREATE, 0666)) == -1)
-	
-    }
+  return (new_cmd);
 }
