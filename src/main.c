@@ -5,7 +5,7 @@
 ** Login   <nikola@epitech.net>
 **
 ** Started on  Mon Apr 03 13:49:13 2017 nikola.tomic@epitech.eu
-** Last update Fri May 19 18:52:05 2017 Léandre Blanchard
+** Last update Sat May 20 11:59:02 2017 
 */
 
 #include <stdlib.h>
@@ -18,6 +18,8 @@
 #include <sys/ioctl.h>
 #include <termios.h>
 #include "my.h"
+
+extern char	**environ;
 
 void			check_status(int *ret)
 {
@@ -46,7 +48,7 @@ void			check_status(int *ret)
     }
 }
 
-int			main(int ac, char **av, char **envp)
+int			main(void)
 {
   t_list		*dupenvp;
   struct termios	old;
@@ -54,10 +56,8 @@ int			main(int ac, char **av, char **envp)
 
   signal(SIGINT, sigint_handler);
   ioctl(0, TCGETS, &old);
-  ac = ac;
-  av = av;
   ret = 0;
-  dupenvp = tab_to_list(envp);
+  dupenvp = tab_to_list(environ);
   if (via_pipe(NULL) == 0)
     routine_ioctl();
   mainloop(dupenvp, &ret);

@@ -5,10 +5,11 @@
 ** Login   <antoine.le-du@epitech.eu>
 ** 
 ** Started on  Mon May 15 16:15:54 2017 Antoine
-** Last update Fri May 19 17:43:24 2017 Antoine
+** Last update Sat May 20 00:43:01 2017 
 */
 
 #include <unistd.h>
+#include <stdio.h>
 #include <wordexp.h>
 #include <string.h>
 #include <stdlib.h>
@@ -182,10 +183,7 @@ int		my_echo(char *str)
     return (1);
   tab = p.we_wordv;
   if (tab == NULL)
-    {
-      my_putchar('\n');
-      return (0);
-    }
+    return (putchar('\n'));
   i = -1;
   while (tab[++i] != NULL)
     echo2(tab, fct, i, &var);

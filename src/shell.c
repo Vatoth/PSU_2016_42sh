@@ -5,7 +5,7 @@
 ** Login   <leandre.blanchard@epitech.eu>
 **
 ** Started on  Sun May 14 23:44:43 2017 Léandre Blanchard
-** Last update Sat May 20 00:39:47 2017 
+** Last update Sat May 20 00:41:57 2017 
 */
 
 #include <pwd.h>
@@ -85,7 +85,7 @@ int		recreate_path(t_list **dupenvp, char *s)
 {
   size_t	n;
   char		*prev;
-  
+
   if (check_env(*dupenvp, "PATH") == 1)
     {
       n = confstr(_CS_PATH, NULL, (size_t)0);
