@@ -5,10 +5,11 @@
 ** Login   <leandre.blanchard@epitech.eu>
 ** 
 ** Started on  Fri May 19 16:58:25 2017 Léandre Blanchard
-** Last update Sat May 20 15:16:28 2017 Léandre Blanchard
+** Last update Sun May 21 17:06:19 2017 Léandre Blanchard
 */
 
 #include "routine.h"
+#include "libmy.h"
 
 int                     up_key(t_curset *curset)
 {

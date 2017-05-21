@@ -5,10 +5,11 @@
 ** Login   <leandre.blanchard@epitech.eu>
 ** 
 ** Started on  Sat May 20 14:48:19 2017 Léandre Blanchard
-** Last update Sat May 20 17:00:22 2017 Léandre Blanchard
+** Last update Sun May 21 17:05:57 2017 Léandre Blanchard
 */
 
 #include "routine.h"
+#include "libmy.h"
 
 void		new_hist(t_curset *curset, int dir)
 {

@@ -5,11 +5,10 @@
 ** Login   <leandre.blanchard@epitech.eu>
 ** 
 ** Started on  Sat May 20 18:27:40 2017 Léandre Blanchard
-** Last update Sat May 20 22:30:02 2017 Léandre Blanchard
+** Last update Sun May 21 17:14:04 2017 Léandre Blanchard
 */
 
-#include <glob.h>
-#include "routine.h"
+#include "completion.h"
 
 static char    	**load_or_return(char *new, t_curset *curset)
 {
@@ -54,7 +53,8 @@ int		call_completion(t_curset *curset)
       curset->s = my_catalloc(str.start, tab[i], str.end);
       curset->cur = my_strlen(curset->s);
       print_cur(curset->cur, curset->s);
-      read(0, &curset->ch, 1);
+      if (tab[i + 1] != NULL)
+	read(0, &curset->ch, 1);
       i++;
     }
   free_tab(tab);

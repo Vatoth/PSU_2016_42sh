@@ -5,7 +5,7 @@
 ** Login   <leandre.blanchard@epitech.eu>
 ** 
 ** Started on  Mon Apr  3 18:54:59 2017 Léandre Blanchard
-** Last update Sun May 21 10:23:52 2017 
+** Last update Sun May 21 15:49:32 2017 Léandre Blanchard
 */
 
 #include <stdlib.h>
@@ -16,20 +16,21 @@ void		shift_left(char *s, int nb)
   int		i;
   int		status;
 
-  status = 0;
-  if (my_strlen(s) < nb)
-    nb = my_strlen(s);
-  if (s == NULL)
-    return;
-  while (status != nb)
+  if (s != NULL)
     {
-      i = 0;
-      while (s[i] != 0)
+      status = 0;
+      if (my_strlen(s) < nb)
+	nb = my_strlen(s);
+      while (status != nb)
 	{
-	  s[i] = s[i + 1];
-	  i++;
+	  i = 0;
+	  while (s[i] != 0)
+	    {
+	      s[i] = s[i + 1];
+	      i++;
+	    }
+	  status++;
 	}
-      status++;
     }
 }
 

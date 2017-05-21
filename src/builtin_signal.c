@@ -5,10 +5,11 @@
 ** Login   <leandre.blanchard@epitech.eu>
 ** 
 ** Started on  Fri May 19 17:00:42 2017 Léandre Blanchard
-** Last update Sat May 20 22:43:22 2017 Léandre Blanchard
+** Last update Sun May 21 17:05:13 2017 Léandre Blanchard
 */
 
 #include "routine.h"
+#include "libmy.h"
 #include "colors.h"
 
 int                     ctrl_c(t_curset *curset)

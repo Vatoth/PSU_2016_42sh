@@ -5,7 +5,7 @@
 ** Login   <quentin.sonnefraud@epitech.eu>
 ** 
 ** Started on  Sat May 20 13:14:10 2017 
-** Last update Sun May 21 10:21:53 2017 
+** Last update Sun May 21 15:10:05 2017 
 */
 
 #include <string.h>
@@ -92,7 +92,6 @@ int		unalias(t_list_al *alias, char *cmd)
   return (0);
 }
 
-
 char		*replace_alias(char *cmd, t_list_al *alias)
 {
   t_alias	*tmp;
@@ -114,8 +113,7 @@ char		*replace_alias(char *cmd, t_list_al *alias)
 		  free(cmd);
 		  return (new_cmd);
 		}
-	      else
-		return (NULL);
+	      return (NULL);
 	    }
 	}
       tmp = tmp->next;

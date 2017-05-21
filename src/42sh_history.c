@@ -5,18 +5,18 @@
 ** Login   <leandre.blanchard@epitech.eu>
 ** 
 ** Started on  Wed May 17 18:08:29 2017 Léandre Blanchard
-** Last update Sat May 20 21:29:59 2017 Léandre Blanchard
+** Last update Sun May 21 15:29:55 2017 
 */
 
 #include "42sh_history.h"
 #include "colors.h"
 
-static int     	write_cmd(const char *cmd)
+static int	write_cmd(const char *cmd)
 {
   int		fd;
   char		*filename;
 
-  if ((filename = get_path("/.42sh_history")) == NULL)
+  if ((filename = get_path(PATH_HISTORY)) == NULL)
     return (-1);
   if ((fd = open(filename, O_WRONLY | O_CREAT | O_APPEND, 0666)) < 0)
     return (-1);
@@ -51,7 +51,7 @@ static int	get_size(int fd)
   return (size);
 }
 
-static char    	**create_history(const char *file)
+static char	**create_history(const char *file)
 {
   char		*filename;
   char		**cmds;

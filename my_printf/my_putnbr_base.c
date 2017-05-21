@@ -5,7 +5,7 @@
 ** Login   <lblanchard@epitech.net>
 ** 
 ** Started on  Wed Nov  9 11:32:20 2016 Leandre Blanchard
-** Last update Sun Apr 30 17:16:24 2017 Léandre Blanchard
+** Last update Sun May 21 17:52:45 2017 Léandre Blanchard
 */
 
 #include "my_printf.h"
@@ -78,5 +78,6 @@ int    my_putnbr_base(long long nbr, char *base)
 
 void    my_nputnbr_base(long long nbr, char *base, int n)
 {
-  my_putnbr_base(nbr, base);
+  if (n > 0)
+    my_putnbr_base(nbr, base);
 }

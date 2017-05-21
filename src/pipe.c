@@ -5,7 +5,7 @@
 ** Login   <nikola@epitech.net>
 **
 ** Started on  Sat May 20 17:47:08 2017
-** Last update Sat May 20 23:30:48 2017 
+** Last update Sun May 21 17:01:41 2017 Léandre Blanchard
 */
 
 #include <stdlib.h>
@@ -29,7 +29,7 @@ static int	left_pipe(t_btree *tmp, t_env *my_env,
 	exit(my_error(NULL, "Ambiguous output redirect.\n", 1, fd));
       redirections(tmp->cmd);
       if (!builtins(tmp->cmd, my_env, alias))
-	execution(tmp->cmd, my_env, fd, alias);
+	execution(tmp->cmd, my_env, fd);
       exit(my_env->ret);
     }
   return (1);
@@ -52,7 +52,7 @@ static void	right_pipe(t_btree *tmp, t_env *my_env,
     exit(my_error(NULL, "Ambiguous output redirect.\n", 1, fd));
   redirections(tmp->parent->right->cmd);
   if (!builtins(tmp->parent->right->cmd, my_env, alias))
-    execution(tmp->parent->right->cmd, my_env, fd, alias);
+    execution(tmp->parent->right->cmd, my_env, fd);
   exit(my_env->ret);
 }
 
@@ -110,14 +110,14 @@ int		my_pipes(char *cmd, t_env *my_env, t_list_al *alias)
       || (fd = dup(1)) == -1 || !check_cmds(tab, &(my_env->ret), cmd)
       || !(tree = make_tree(tab)))
     return (1);
-  len = tab_len(tab) + 1;
+  len = my_tablen(tab) + 1;
   if (pipe_loop(tree, my_env, fd, alias) == 1)
     return (my_env->ret = 1);
   worst_status = 0;
   while (--len)
     {
       check_status(&(my_env->ret));
-      worst_status = (my_env->ret) ? my_env->ret : worst_status;
+      worst_status = (!worst_status) ? my_env->ret : worst_status;
     }
   free_tree(tree);
   free_tab(tab);

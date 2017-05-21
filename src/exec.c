@@ -5,7 +5,7 @@
 ** Login   <leandre.blanchard@epitech.eu>
 **
 ** Started on  Mon May 15 15:09:15 2017 Léandre Blanchard
-** Last update Sun May 21 10:23:30 2017 
+** Last update Sun May 21 15:25:00 2017 
 */
 
 #include <string.h>
@@ -14,19 +14,18 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include "define.h"
 #include "my.h"
 
 int             execution(char *cmd, t_env *my_env,
-			  int fd, t_list_al *alias)
+			  int fd)
 {
   char          **tabenvp;
   char          **args;
   wordexp_t	p;
   struct stat   buf;
 
-  if ((cmd  = replace_alias(cmd, alias)) == NULL)
-    return (-1);
-  if (strncmp(cmd, "ls", 2) == 0 || strncmp(cmd, "grep", 4) == 0)
+  if (strncmp(cmd, LS, 2) == 0 || strncmp(cmd, GREP, 4) == 0)
     cmd = add_color(cmd);
   if ((recreate_env(&(my_env->env)) == -1) ||
       (wordexp(cmd, &p, 0) != 0) || (args = p.we_wordv) == NULL ||
@@ -35,12 +34,11 @@ int             execution(char *cmd, t_env *my_env,
   tabenvp = list_to_tab(my_env->env);
   stat(args[0], &buf);
   if (access(args[0], F_OK) == -1 || !my_strstr(args[0], "/"))
-    my_env->ret = my_error(args[0], ": Command not found.\n", 1, fd);
+    my_env->ret = my_error(args[0], CMD_NOT_FOUND, 1, fd);
   else if (access(args[0], X_OK) == -1 || S_ISDIR(buf.st_mode))
-    my_env->ret = my_error(args[0], ": Permission denied.\n", 1, fd);
+    my_env->ret = my_error(args[0], BAD_PERMISSIONS, 1, fd);
   else if (execve(args[0], args, tabenvp) == -1)
-    my_env->ret = my_error(args[0], ": Exec format error. "
-		    "Binary file not executable.\n", 1, fd);
+    my_env->ret = my_error(args[0], NOT_EXEC, 1, fd);
   else
     my_env->ret = 0;
   free_tab(tabenvp);

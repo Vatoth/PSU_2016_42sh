@@ -5,7 +5,7 @@
 ** Login   <antoine.le-du@epitech.eu>
 ** 
 ** Started on  Mon May 15 16:15:54 2017 Antoine
-** Last update Sat May 20 16:56:52 2017 Antoine
+** Last update Sun May 21 19:54:25 2017 Antoine
 */
 
 #include <unistd.h>
@@ -26,7 +26,7 @@ static void	init_tab_fct(t_sp_fcts (fct)[3])
   fct[2].fct = &without_backslash;
 }
 
-static void	echo3(char **tab, t_sp_fcts fct[3],
+static int	echo3(char **tab, t_sp_fcts fct[3],
 		      int i, t_sp_flag *var)
 {
   (*var).index_flag = 0;
@@ -49,7 +49,9 @@ static void	echo3(char **tab, t_sp_fcts fct[3],
 	my_putstr_without_sp(tab[i]);
       else
 	my_putstr(tab[i]);
+      return (1);
     }
+  return (0);
 }
 
 static void	echo2(char **tab, t_sp_fcts fct[3],
@@ -60,7 +62,8 @@ static void	echo2(char **tab, t_sp_fcts fct[3],
       (*var).index_tab = 1;
       while (tab[i][(*var).index_tab] != '\0')
 	{
-	  echo3(tab, fct, i, var);
+	  if (echo3(tab, fct, i, var) == 1)
+	    break;
 	  (*var).index_tab++;
 	}
     }

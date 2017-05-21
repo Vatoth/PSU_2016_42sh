@@ -5,11 +5,12 @@
 ** Login   <leandre.blanchard@epitech.eu>
 ** 
 ** Started on  Tue May 16 16:53:10 2017 Léandre Blanchard
-** Last update Sat May 20 18:55:58 2017 Léandre Blanchard
+** Last update Sun May 21 17:06:28 2017 Léandre Blanchard
 */
 
 #include "colors.h"
 #include "routine.h"
+#include "libmy.h"
 
 int                     routine_ioctl(void)
 {
@@ -63,11 +64,12 @@ static int		add_char(t_curset *curset)
                      && curset->ch != 127 && curset->ch != 12
       && curset->ch != 10 && curset->ch != 27 && curset->ch != 11)
     {
-      if (my_strlen(curset->s) != 0 && curset->ch == 9)
+      if (curset->cur != 0 && curset->ch == 9
+	  && nb_of(curset->s, ' ') > 0)
 	return (call_completion(curset));
-      if (c[2] != 91 && c[1] != 27)
+      else if (c[2] != 91 && c[1] != 27 && curset->ch != '\t')
 	move_and_add(curset->s, curset->cur, curset->ch);
-      else
+      else if (curset->ch != '\t')
 	curset->s[my_strlen(curset->s)] = curset->ch;
       curset->cur++;
     }

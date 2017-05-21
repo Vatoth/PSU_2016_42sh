@@ -5,42 +5,28 @@
 ** Login   <quentin.sonnefraud@epitech.eu>
 ** 
 ** Started on  Mon May 15 14:05:45 2017 
-** Last update Sat May 20 00:34:06 2017 
+** Last update Sun May 21 17:52:04 2017 Antoine
 */
 
 #include <stdlib.h>
+#include <unistd.h>
 #include <stdio.h>
 #include <string.h>
 #include "my.h"
 
-static int	check_simple_quote(const char *s, int *i)
+static int	check_parse(const char *s)
 {
-  if (s[*i] == '\'')
+  if ((s[0] == '|' && s[1] && s[1] == '|'))
     {
-      *i = *i + 1;
-      while (s[*i] != '\0' && s[*i] != '\'')
-	*i = *i + 1;
-      if (s[*i] == '\0')
-	{
-	  puts("Unmatched '''.");
-	  return (1);
-	}
+      write(2, "Invalid null command.\n", 23);
+      return (1);
     }
-  if (s[*i] == '`')
-    {
-      *i = *i + 1;
-      while (s[*i] != '\0' && s[*i] != '`')
-        *i = *i + 1;
-      if (s[*i] == '\0')
-        {
-          puts("Unmatched '`'.");
-          return (1);
-        }
-    }
+  if (check_ambigus(s) == 1)
+    return (1);
   return (0);
 }
 
-static int	check_ambigus(const char *s)
+int		check_ambigus(const char *s)
 {
   int		i;
 
@@ -54,119 +40,13 @@ static int	check_ambigus(const char *s)
 	    i++;
 	  if (s[i] == '\0')
 	    {
-	      puts("Unmatched '\"'.");
+	      write(2, "Unmatched '\"'.\n", 15);
 	      return (1);
 	    }
 	}
       if (check_simple_quote(s, &i) == 1)
 	return (1);
     }
-  return (0);
-}
-
-static void			make_link(t_parse *new_element,
-					  t_info *list, const char token,
-					  const int j)
-{
-  memset(new_element->line, 0, j + 1);
-  new_element->token = token;
-  new_element->prev = list->last;
-  new_element->next = NULL;
-  if (list->last)
-    list->last->next = new_element;
-  else
-    list->first = new_element;
-  list->last = new_element;
-}
-
-static int                     take_argument(t_info *list, char *s,
-				      const char token,
-				      const int a)
-{
-  int				j;
-  int				i;
-  t_parse			*new_element;
-
-  i = a - 1;
-  j = 0;
-  while (s[++i] && (i <= (list->i - 1)))
-    j++;
-  if (j == 0)
-    return (0);
-  if (!(new_element = malloc(sizeof(t_parse)))
-      || !(new_element->line = malloc(sizeof(char) * (j + 1))))
-    return (-1);
-  make_link(new_element, list, token, j);
-  i = a;
-  j = 0;
-  while (s[i] && (i <= (list->i - 1)))
-    {
-      new_element->line[j] = s[i];
-      j++;
-      i++;
-    }
-  epur_str(new_element->line);
-  return (0);
-}
-
-static int	my_parse_continue(t_info *list, char *s,
-				  int *a, int *rest)
-{
-  if (s[list->i] == '"')
-    {
-      list->i++;
-      while (s[list->i] != '\0' && s[list->i] != '"')
-	list->i++;
-    }
-  if (s[list->i] == '\'')
-    {
-      list->i++;
-      while (s[list->i] != '\0' && s[list->i] != '\'')
-	list->i++;
-    }
-  if (s[list->i] == '|' && s[list->i + 1] != '\0' && s[list->i + 1] == '|')
-    {
-      if (take_argument(list, s, '|', *a) == -1)
-	return (-1);
-      list->i = list->i + 2;
-      *a = list->i;
-      *rest = list->i;
-    }
-  return (0);
-}
-
-static int	parse_and(t_info *list, char *s,
-			  int *a, int *rest)
-{
-  if (s[list->i] == ';')
-    {
-      if (take_argument(list, s, ';', *a) == -1)
-	return (-1);
-      list->i++;
-      *a = list->i;
-      *rest = list->i;
-    }
-  if (s[list->i] && s[list->i] == '&' && s[list->i + 1]
-      && s[list->i + 1] == '&')
-    {
-      if (take_argument(list, s, '&', *a) == -1)
-	return (-1);
-      list->i = list->i + 2;
-      *a = list->i;
-      *rest = list->i;
-    }
-  return (0);
-}
-
-static int	check_parse(const char *s)
-{
-  if ((s[0] == '|' && s[1] && s[1] == '|'))
-    {
-      puts("Invalid null command.");
-      return (1);
-    }
-  if (check_ambigus(s) == 1)
-    return (1);
   return (0);
 }
 
@@ -210,7 +90,7 @@ int		explore(t_info *list)
 	   ((parse->line == NULL) || (parse->line[0] == 0)))
 	  || (strcmp(parse->line, "||") == 0))
 	{
-	  puts("Invalid null command.");
+	  write(2, "Invalid null command.\n", 23);
 	  clear_list(list);
 	  return (1);
 	}

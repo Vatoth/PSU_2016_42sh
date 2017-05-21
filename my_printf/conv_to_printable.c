@@ -5,7 +5,7 @@
 ** Login   <lblanchard@epitech.net>
 ** 
 ** Started on  Tue Nov  8 16:36:03 2016 Leandre Blanchard
-** Last update Fri Feb 24 16:28:41 2017 Léandre Blanchard
+** Last update Sun May 21 17:51:59 2017 Léandre Blanchard
 */
 
 #include "my.h"
@@ -18,7 +18,7 @@ void	conv_to_printable(char *str)
   i = 0;
   while (str[i] != '\0')
     {
-      if (str[i] > 32 && str[i] <= 127)
+      if (str[i] > 32)
 	my_putchar(str[i]);
       else
 	{

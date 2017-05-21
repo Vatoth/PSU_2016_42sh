@@ -5,7 +5,7 @@
 ** Login   <lblanchard@epitech.net>
 ** 
 ** Started on  Tue Nov  8 19:24:05 2016 Leandre Blanchard
-** Last update Sun Apr 30 16:46:10 2017 Léandre Blanchard
+** Last update Sun May 21 17:22:01 2017 Léandre Blanchard
 */
 
 #include "my.h"
@@ -25,7 +25,8 @@ char    *int_to_char(int nb)
       len = len + 1;
       nm = nm / 10;
     }
-  number = malloc(sizeof (char) * i + 1);
+  if ((number = malloc(sizeof (char) * i + 1)) == NULL)
+    return (NULL);
   i = 0;
   while (nb % 10 != 0)
     {

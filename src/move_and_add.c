@@ -5,10 +5,11 @@
 ** Login   <leandre.blanchard@epitech.eu>
 ** 
 ** Started on  Sat May 20 17:40:57 2017 Léandre Blanchard
-** Last update Sat May 20 18:08:05 2017 Léandre Blanchard
+** Last update Sun May 21 17:04:36 2017 Léandre Blanchard
 */
 
 #include "routine.h"
+#include "libmy.h"
 
 void		move_and_add(char *s, int cur, char ch)
 {

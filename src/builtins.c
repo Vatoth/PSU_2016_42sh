@@ -5,7 +5,7 @@
 ** Login   <nikola@epitech.net>
 **
 ** Started on  Tue Apr 04 12:44:19 2017 nikola.tomic@epitech.eu
-** Last update Sun May 21 10:17:36 2017 
+** Last update Sun May 21 14:57:50 2017 Quentin Sonnefraud
 */
 
 #include <unistd.h>
@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "my.h"
+#include "define.h"
 
 int		my_unsetenv(t_list **dupenvp, char *arg)
 {
@@ -41,8 +42,7 @@ int		my_setenv(t_list **dupenvp, char *var, char *value)
     return (0);
   if (my_str_isalnum(var) == 0)
     {
-      my_putstr("setenv: Variable name must "
-		"contain alphanumeric characters.\n");
+      my_printf("%s%s", ERROR_ENV, ERRENV);
       return (1);
     }
   tmp = *dupenvp;
@@ -65,24 +65,51 @@ int	my_cd(t_list **dupenvp, char *arg)
   char	*old_dir;
 
   if (!arg)
-    new_dir = my_get_var(*dupenvp, "HOME");
+    new_dir = my_get_var(*dupenvp, VAR_HOME);
   else if (my_strlen(arg) == 1 && arg[0] == '-')
-    new_dir = my_get_var(*dupenvp, "OLDPWD");
+    new_dir = my_get_var(*dupenvp, VAR_OLDPWD);
   else
     new_dir = (arg[0] == '~') ?
-      my_strcat(my_get_var(*dupenvp, "HOME"), &arg[1]) : arg;
+      my_strcat(my_get_var(*dupenvp, VAR_HOME), &arg[1]) : arg;
   old_dir = getcwd(NULL, 0);
   if (chdir(new_dir) == -1)
     {
-      my_putstr(new_dir);
-      my_putstr(": Not a directory.\n");
+      write(2, new_dir, my_strlen(new_dir));
+      write(2, NOT_DIRECTORY, my_strlen(NOT_DIRECTORY));
       return (1);
     }
   else
     {
-      my_setenv(dupenvp, "OLDPWD", old_dir);
-      my_setenv(dupenvp, "PWD", getcwd(NULL, 0));
+      my_setenv(dupenvp, VAR_OLDPWD, old_dir);
+      my_setenv(dupenvp, VAR_PWD, getcwd(NULL, 0));
     }
+  return (0);
+}
+
+int		base_builtins(char **args, t_env *my_env,
+			      t_list_al *alias, wordexp_t p)
+{
+  if (my_strcmp(args[0], EXIT) == 0)
+    {
+      wordfree(&p);
+      free_list(my_env->env);
+      free_alias(alias);
+      exit(my_env->ret);
+    }
+  else if (my_strcmp(args[0], ENV) == 0)
+    display_list(my_env->env);
+  else if (my_strcmp(args[0], SETENV) == 0)
+    my_env->ret = my_setenv(&(my_env->env), args[1], args[2]);
+  else if (my_strcmp(args[0], UNSETENV) == 0)
+    my_unsetenv(&(my_env->env), args[1]);
+  else if (my_strcmp(args[0], CD) == 0)
+    my_env->ret = my_cd(&(my_env->env), args[1]);
+  else if (my_strcmp(args[0], ALIAS) == 0 && (args[1] != NULL))
+    my_env->ret = add_alias(alias, args[1], args[2]);
+  else if (my_strcmp(args[0], UNALIAS) == 0)
+    unalias(alias, args[1]);
+  else
+    return (1);
   return (0);
 }
 
@@ -94,29 +121,15 @@ int		builtins(char *cmd, t_env *my_env,
 
   if ((wordexp(cmd, &p, 0)) != 0 || (args = p.we_wordv) == NULL)
     return (0);
-  if (my_strcmp(args[0], "exit") == 0)
+  if (base_builtins(args, my_env, alias, p) == 0)
     {
       wordfree(&p);
-      free_list(my_env->env);
-      free_alias(alias);
-      exit(my_env->ret);
+      return (1);
     }
-  else if (my_strcmp(args[0], "env") == 0)
-    display_list(my_env->env);
-  else if (my_strcmp(args[0], "setenv") == 0)
-    my_env->ret = my_setenv(&(my_env->env), args[1], args[2]);
-  else if (my_strcmp(args[0], "unsetenv") == 0)
-    my_unsetenv(&(my_env->env), args[1]);
-  else if (my_strcmp(args[0], "cd") == 0)
-    my_env->ret = my_cd(&(my_env->env), args[1]);
-  else if (my_strcmp(args[0], "alias") == 0 && (args[1] != NULL))
-    my_env->ret = add_alias(alias, args[1], args[2]);
-  else if (my_strcmp(args[0], "unalias") == 0)
-    unalias(alias, args[1]);
-  else if (args[1] != NULL && my_strcmp(args[0], "echo") == 0
+  else if (args[1] != NULL && my_strcmp(args[0], MY_ECHO) == 0
 	   && my_strcmp(args[1], "$?") == 0)
     my_printf("%d\n", my_env->ret);
-  else if (my_strcmp(args[0], "echo") == 0)
+  else if (my_strcmp(args[0], MY_ECHO) == 0)
     my_echo(cmd);
   else
     {

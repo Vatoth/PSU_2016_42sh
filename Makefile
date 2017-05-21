@@ -5,23 +5,51 @@
 ## Login   <TomicNikola@epitech.net>
 ##
 ## Started on  Sat Oct 15 19:37:46 2016 Nikola Tomic
-## Last update Sun May 21 10:26:44 2017 
+## Last update Sun May 21 20:32:16 2017 
 ##
 
 CPPFLAGS	+= -I./include/
 
-LIB	= -L./my_printf -lmyprintf -lncurses
+LIBS	= -L./my_printf -lmyprintf -lncurses
+
+LIB	= my_printf/libmyprintf.a
 
 CFLAGS	+= -Wall -Wextra -Werror
+
+SRC_LIB = my_printf/char_to_nchar.c \
+          my_printf/char_to_nchar.c \
+          my_printf/int_to_char.c \
+          my_printf/my_putstr.c \
+          my_printf/pointeur.c \
+          my_printf/conv_to_printable.c \
+          my_printf/int_to_nint.c \
+          my_printf/my_int_char.c \
+          my_printf/my_putchar.c \
+          my_printf/my_putstr_error.c \
+          my_printf/dec_to_base.c \
+          my_printf/my_int_len.c \
+          my_printf/my_putnbr_base.c \
+          my_printf/my_strncpy.c \
+          my_printf/float_to_char.c \
+          my_printf/my_getnbr.c \
+          my_printf/my_printf.c \
+          my_printf/my_put_nbr.c \
+          my_printf/nb_arg.c
+
+OBJ_LIB =  $(SRC_LIB:.c=.o)
 
 SRC	= src/builtins.c		\
 	  src/find_path.c		\
 	  src/alias.c			\
+	  src/init_alias.c		\
 	  src/free.c			\
+	  src/init_execution.c	 	\
 	  src/move_and_add.c		\
 	  src/complete.c		\
+	  src/loop_cmd.c		\
 	  src/tab_append.c		\
 	  src/builtin_signal.c		\
+	  src/my_str_isascii.c		\
 	  src/call_completion.c		\
 	  src/new_hist.c		\
 	  src/get_path.c		\
@@ -30,6 +58,7 @@ SRC	= src/builtins.c		\
 	  src/basic_wordtab.c		\
 	  src/my_frealloc.c		\
 	  src/key.c			\
+	  src/parse2.c			\
 	  src/parse.c			\
 	  src/add_color.c		\
 	  src/via_pipe.c		\
@@ -81,14 +110,19 @@ RM	= -rm -f
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	$(CC) $(OBJ) -o $(NAME) $(LIB)
+$(NAME): $(LIB) $(OBJ)
+	$(CC) $(OBJ) -o $(NAME) $(LIBS)
+
+$(LIB): $(OBJ_LIB)
+	ar rc ./my_printf/libmyprintf.a $(OBJ_LIB)
 
 clean:
 	$(RM) $(OBJ)
+	$(RM) $(OBJ_LIB)
 
 fclean: clean
 	$(RM) $(NAME)
+	$(RM) ./my_printf/libmyprintf.a
 
 re: fclean all
 

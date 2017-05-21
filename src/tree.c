@@ -5,7 +5,7 @@
 ** Login   <nikola@epitech.net>
 **
 ** Started on  Sun Apr 09 11:33:57 2017 nikola.tomic@epitech.eu
-** Last update Sat May 20 15:09:55 2017 
+** Last update Sun May 21 17:01:31 2017 Léandre Blanchard
 */
 
 #include <stdlib.h>
@@ -58,7 +58,7 @@ t_btree		*make_tree(char **tab)
   if (!tab)
     return (NULL);
   tree = put_node(NULL, NULL, RIGHT);
-  i = tab_len(tab);
+  i = my_tablen(tab);
   while (--i > 0)
     {
       if (!(leftmost = get_outermost(tree, LEFT)) ||

@@ -5,11 +5,12 @@
 ** Login   <nikola@epitech.net>
 **
 ** Started on  Tue Apr 04 14:19:19 2017 nikola.tomic@epitech.eu
-** Last update Sat May 20 17:56:27 2017 
+** Last update Sun May 21 15:35:24 2017 
 */
 
 #include <unistd.h>
 #include <stdlib.h>
+#include "define.h"
 #include "my.h"
 
 char	*find_path(t_list *dupenvp, char *cmd)
@@ -20,7 +21,7 @@ char	*find_path(t_list *dupenvp, char *cmd)
 
   if (!cmd || my_strstr(cmd, "/"))
     return (NULL);
-  tab = my_str_to_wordtab(my_get_var(dupenvp, "PATH"), ":");
+  tab = my_str_to_wordtab(my_get_var(dupenvp, VAR_PATH), ":");
   i = 0;
   while (tab && tab[i])
     {

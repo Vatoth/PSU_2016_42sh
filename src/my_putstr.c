@@ -5,16 +5,17 @@
 ** Login   <TomicNikola@epitech.net>
 **
 ** Started on  Thu Oct  6 08:42:15 2016 Nikola Tomic
-** Last update Wed May 17 14:47:08 2017 Léandre Blanchard
+** Last update Sun May 21 16:59:51 2017 Léandre Blanchard
 */
 
 #include <stdlib.h>
 #include <unistd.h>
-#include "my.h"
+#include "libmy.h"
 
-int	my_putstr(char *str)
+void	my_putstr(const char *str)
 {
   if (str == NULL)
-    return (write(1, "*NULL", 5));
-  return (write(1, str, my_strlen(str)));
+    write(1, "*NULL", 5);
+  else
+    write(1, str, my_strlen(str));
 }

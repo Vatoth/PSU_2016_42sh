@@ -5,7 +5,7 @@
 ** Login   <nikola@epitech.net>
 **
 ** Started on  Mon Apr 03 13:49:13 2017 nikola.tomic@epitech.eu
-** Last update Sat May 20 19:11:23 2017 nikola.tomic@epitech.eu
+** Last update Sun May 21 15:45:27 2017 
 */
 
 #include <stdlib.h>
@@ -17,6 +17,7 @@
 #include <stdio.h>
 #include <sys/ioctl.h>
 #include <termios.h>
+#include "define.h"
 #include "my.h"
 
 extern char	**environ;
@@ -34,15 +35,15 @@ void			check_status(int *ret)
     {
       sig = WTERMSIG(status);
       if (sig == SIGABRT)
-	my_putstr("Aborted");
+	my_putstr(ABORT);
       else if (sig == SIGFPE)
-	my_putstr("Floating exception");
+	my_putstr(FLOAT);
       else if (sig == SIGSEGV)
-	my_putstr("Segmentation fault");
+	my_putstr(SEV);
       else
-	my_putstr("Signal received");
+	my_putstr(SIGNAL);
       if (WCOREDUMP(status))
-	my_putstr(" (core dumped)");
+	my_putstr(CORE);
       my_putchar('\n');
       *ret = sig + 128;
     }

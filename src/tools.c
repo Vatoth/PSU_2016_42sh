@@ -5,7 +5,7 @@
 ** Login   <nikola@epitech.net>
 **
 ** Started on  Mon Apr 03 16:28:24 2017 nikola.tomic@epitech.eu
-** Last update Sat May 20 14:14:56 2017 nikola.tomic@epitech.eu
+** Last update Sun May 21 14:50:49 2017 Léandre Blanchard
 */
 
 #include <stdlib.h>
@@ -35,12 +35,15 @@ char		*my_get_var(t_list *list, char *var)
 
 int	my_error(char *cmd, char *msg, int ret, int fd)
 {
-  if (!msg || !ret)
+  char	*disp;
+
+  if (!(disp = my_catalloc(cmd, msg, NULL)))
     return (0);
-  if (cmd)
-    write(fd, cmd, my_strlen(cmd));
-  if (msg)
-    write(fd, msg, my_strlen(msg));
+  if (disp)
+    {
+      write(fd, disp, my_strlen(disp));
+      free(disp);
+    }
   return (ret);
 }
 
@@ -95,18 +98,4 @@ char	*my_strip(char *str, char *to_strip)
     }
   ret[i] = 0;
   return (ret);
-}
-
-int	my_str_isascii(char *str)
-{
-  int	i;
-
-  i = 0;
-  while (str[i] != 0)
-    {
-      if (str[i] < 20)
-	return (1);
-      i++;
-    }
-  return (0);
 }
