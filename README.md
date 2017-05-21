@@ -26,7 +26,7 @@ make
 • redirections (’<’, ’>’, ’<<’ and ’>>’)
 • pipes (’|’)
 • builtins: cd, echo, exit, setenv, unsetenv,
-• separators: ’;’, ’&&’, ’||’
+• separators: (’;’, ’&&’, ’||’)
 • history
 • alias unalias
 • inhibitors (’\’, '"', ''')
@@ -43,6 +43,8 @@ make
 • Cut the Line after the cursor (ctrl + K)
 • ctrl + C handle as a "non signal" caracter
 • Send EOF (ctrl + d)
+• Autocomplete (tab)
+• history (UP_KEY and DOWN_KEY)
 ```
 
 ## Authors
