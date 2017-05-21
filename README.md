@@ -31,7 +31,7 @@ make
 • alias unalias
 • inhibitors (’\’, '"', ''')
 • globbings (’*’, ’?’, ’[’, ’]’)
-• line edition (multiline, dynamic rebinding, auto-completion dynamic
+• line edition (multiline, dynamic rebinding, auto-completion dynamic)
 • backticks (’‘’)
 ```
 ## Authors
