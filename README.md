@@ -38,7 +38,8 @@ make
 ### Shortcuts
 
 ```
-• Clear (ctrl + L or alt + L)
+• Clear (ctrl + L)
+• ls (alt + L)
 • Cut Characters (ctrl + K)
 • ctrl + C handle as a "non signal" caracter
 • Send EOF (ctrl + d)
