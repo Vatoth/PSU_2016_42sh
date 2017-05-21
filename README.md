@@ -1,6 +1,6 @@
 # PSU_2016_42sh
 
-A shell like TCSH made at Epitech in 2017
+A shell like TCSH with some cools colors 
 
 ### Prerequisites
 
@@ -34,9 +34,21 @@ make
 • line edition (multiline, auto-completion dynamic)
 • backticks (’‘’)
 ```
+
+### Shortcuts
+
+```
+• Clear (ctrl + L or alt + L)
+• Cut Characters (ctrl + K)
+• ctrl + C handle as a "non signal" caracter
+• Send EOF (ctrl + d)
+```
+
 ## Authors
 
 * **Nikola Tomic** - *Initial work with redirections, pipes, cd, execution and environnement* - [Pujomir](https://github.com/Pujomir)
-* **Léandre Blanchard** - *Line editing, history, auto-completion dynamic and tools library* - [LeandreBL](https://github.com/LeandreBl)
+* **Léandre Blanchard** - *Line editing, history, auto-completion dynamic, shorcuts and tools library* - [LeandreBL](https://github.com/LeandreBl)
 * **Antoine Le Dû** - *Builtins echo and help for global parsing* -
 * **Quentin Sonnefraud** -*Globbings, inihibitors, logical operator '&&' '||' and aliases* - [Vatoth](https://github.com/Vatoth)
+
+Made with love at Epitech Paris in 2017
