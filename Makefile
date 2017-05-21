@@ -5,12 +5,12 @@
 ## Login   <TomicNikola@epitech.net>
 ##
 ## Started on  Sat Oct 15 19:37:46 2016 Nikola Tomic
-## Last update Sun May 21 20:32:16 2017 
+## Last update Sun May 21 22:59:01 2017 Léandre Blanchard
 ##
 
 CPPFLAGS	+= -I./include/
 
-LIBS	= -L./my_printf -lmyprintf -lncurses
+LIBS	= -L./my_printf -lmyprintf
 
 LIB	= my_printf/libmyprintf.a
 
@@ -91,7 +91,6 @@ SRC	= src/builtins.c		\
 	  src/my_catalloc.c		\
 	  src/my_revstr.c		\
 	  src/shell.c			\
-	  src/clear.c			\
 	  src/echo.c			\
 	  src/fullfill_echo.c		\
 	  src/my_calloc.c		\

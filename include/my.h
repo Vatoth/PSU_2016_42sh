@@ -5,7 +5,7 @@
 ** Login   <nikola@epitech.net>
 **
 ** Started on  Mon Apr 03 16:50:44 2017 nikola.tomic@epitech.eu
-** Last update Sun May 21 19:35:07 2017 Antoine
+** Last update Sun May 21 23:00:42 2017 Léandre Blanchard
 */
 
 #ifndef MY_H_
@@ -96,7 +96,6 @@ char		*my_calloc(int size);
 char		*get_cmd(char **cmds);
 char		*add_color(char *cmd);
 int		mainloop(t_env *my_env);
-void		my_clear(void);
 int		add_alias(t_list_al *alias,
 			  char *new, char *cmd);
 void		sigint_handler(int sig);

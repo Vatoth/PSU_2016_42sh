@@ -5,7 +5,7 @@
 ** Login   <leandre.blanchard@epitech.eu>
 ** 
 ** Started on  Wed May 17 13:46:07 2017 Léandre Blanchard
-** Last update Sun May 21 19:29:15 2017 Antoine
+** Last update Sun May 21 23:00:50 2017 Léandre Blanchard
 */
 
 #ifndef ROUTINE_H_
@@ -44,7 +44,6 @@ void		new_hist(t_curset *curset, int dir);
 char		*my_frealloc(char *s, int size);
 void		shift_right(char *s, int size);
 void		shift_left(char *s, int size);
-void		my_clear(void);
 void		disp_prompt(void);
 void		backspace(void);
 int		ret_back(t_curset *curset);

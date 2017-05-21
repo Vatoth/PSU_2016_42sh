@@ -5,7 +5,7 @@
 ** Login   <leandre.blanchard@epitech.eu>
 ** 
 ** Started on  Mon May 15 13:58:17 2017 Léandre Blanchard
-** Last update Thu May 18 21:53:39 2017 Léandre Blanchard
+** Last update Sun May 21 22:58:36 2017 Léandre Blanchard
 */
 
 #include <signal.h>
@@ -15,7 +15,6 @@ void		sigint_handler(int signo)
 {
   if (signo == SIGINT)
     {
-      my_clear();
       my_printf("\n");
       disp_prompt();
     }
