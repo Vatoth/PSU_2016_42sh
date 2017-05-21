@@ -5,7 +5,7 @@
 ** Login   <leandre.blanchard@epitech.eu>
 ** 
 ** Started on  Fri May 19 17:00:42 2017 Léandre Blanchard
-** Last update Fri May 19 19:12:04 2017 Léandre Blanchard
+** Last update Sat May 20 22:43:22 2017 Léandre Blanchard
 */
 
 #include "routine.h"
@@ -51,7 +51,9 @@ int                     alt_l(t_curset *curset)
   if (prev == 27 && curset->ch == 'l')
     {
       free(curset->s);
-      my_printf("\b\b  \n");
+      my_printf("\r");
+      disp_prompt();
+      my_printf("ls\n");
       prev = 0;
       return (0);
     }

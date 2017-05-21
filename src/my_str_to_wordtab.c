@@ -5,59 +5,11 @@
 ** Login   <nikola@epitech.net>
 **
 ** Started on  Tue Jan 17 15:19:39 2017 nikola.tomic@epitech.eu
-** Last update Fri May 19 16:52:26 2017 
+** Last update Sat May 20 19:44:15 2017 
 */
 
 #include <stdlib.h>
 #include "my.h"
-
-void		protect_extra(char *s)
-{
-  int		i;
-
-  i = 0;
-  while (s[i])
-    {
-      if (s[i] == '"')
-	{
-	  while (s[++i] != '\0' && s[i] != '"')
-	    if (s[i] == '|')
-	      s[i] = -1;
-	}
-      if (s[i] == '\'')
-	{
-          while (s[i] != '\0' && s[i] != '\'')
-	    if (s[i] == '|')
-	      s[i] = -1;
-	}
-      if (s[i] == '`')
-	{
-	  while (s[i] != '\0' && s[i] != '`')
-            if (s[i] == '|')
-              s[i] = -1;
-	}
-      i++;
-    }
-}
-
-void		restore_extra(char **tab)
-{
-  int		i;
-  int		j;
-
-  j = 0;
-  while (tab[j])
-    {
-      i = 0;
-      while (tab[j][i])
-	{
-	  if (tab[j][i] == -1)
-	    tab[j][i] = '|';
-	  i++;
-	}
-      j++;
-    }
-}
 
 static int	my_issep(char c, char *seps)
 {
@@ -131,7 +83,6 @@ char	**my_str_to_wordtab(char *str, char *seps)
       args = &str;
       return (args);
     }
-  protect_extra(str);
   y = 0;
   j = 0;
   i = get_nb_args(str, seps);
@@ -143,6 +94,5 @@ char	**my_str_to_wordtab(char *str, char *seps)
       y += 1;
     }
   args[y] = NULL;
-  restore_extra(args);
   return (args);
 }

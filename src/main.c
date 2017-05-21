@@ -5,7 +5,7 @@
 ** Login   <nikola@epitech.net>
 **
 ** Started on  Mon Apr 03 13:49:13 2017 nikola.tomic@epitech.eu
-** Last update Sat May 20 11:59:02 2017 
+** Last update Sat May 20 19:11:23 2017 nikola.tomic@epitech.eu
 */
 
 #include <stdlib.h>
@@ -50,20 +50,19 @@ void			check_status(int *ret)
 
 int			main(void)
 {
-  t_list		*dupenvp;
   struct termios	old;
-  int			ret;
+  t_env			my_env;
 
   signal(SIGINT, sigint_handler);
   ioctl(0, TCGETS, &old);
-  ret = 0;
-  dupenvp = tab_to_list(environ);
+  my_env.ret = 0;
+  my_env.env = tab_to_list(environ);
   if (via_pipe(NULL) == 0)
     routine_ioctl();
-  mainloop(dupenvp, &ret);
-  free_list(dupenvp);
+  mainloop(&my_env);
+  free_list(my_env.env);
   if (!via_pipe(NULL))
     my_putchar('\n');
   ioctl(0, TCSETS, &old);
-  return (ret);
+  return (my_env.ret);
 }

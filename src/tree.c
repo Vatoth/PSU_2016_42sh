@@ -5,7 +5,7 @@
 ** Login   <nikola@epitech.net>
 **
 ** Started on  Sun Apr 09 11:33:57 2017 nikola.tomic@epitech.eu
-** Last update Wed May 17 14:06:20 2017 nikola.tomic@epitech.eu
+** Last update Sat May 20 15:09:55 2017 
 */
 
 #include <stdlib.h>
@@ -15,7 +15,6 @@
 t_btree		*put_node(t_btree *parent, char *cmd, char side)
 {
   t_btree	*node;
-  int		*pp;
 
   if (!(node = (t_btree *) malloc(sizeof(*node))))
     return (NULL);
@@ -25,9 +24,8 @@ t_btree		*put_node(t_btree *parent, char *cmd, char side)
   node->right = NULL;
   if (!parent || side == LEFT)
     {
-      if (!(pp = (int *) malloc(sizeof(int) * 2)) || (pipe(pp) == -1))
+      if (!(node->pp = (int *) malloc(sizeof(int) * 2)))
 	return (NULL);
-      node->pp = pp;
     }
   if (parent && side == LEFT)
     parent->left = node;

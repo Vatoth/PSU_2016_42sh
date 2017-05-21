@@ -5,10 +5,11 @@
 ** Login   <nikola@epitech.net>
 **
 ** Started on  Mon Apr 03 16:28:24 2017 nikola.tomic@epitech.eu
-** Last update Fri May 19 10:22:27 2017 Léandre Blanchard
+** Last update Sat May 20 14:14:56 2017 nikola.tomic@epitech.eu
 */
 
 #include <stdlib.h>
+#include <unistd.h>
 #include "my.h"
 
 char		*my_get_var(t_list *list, char *var)
@@ -32,12 +33,14 @@ char		*my_get_var(t_list *list, char *var)
   return (ret);
 }
 
-int	my_error(char *cmd, char *msg, int ret)
+int	my_error(char *cmd, char *msg, int ret, int fd)
 {
   if (!msg || !ret)
     return (0);
-  my_putstr(cmd);
-  my_putstr(msg);
+  if (cmd)
+    write(fd, cmd, my_strlen(cmd));
+  if (msg)
+    write(fd, msg, my_strlen(msg));
   return (ret);
 }
 

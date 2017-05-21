@@ -5,7 +5,7 @@
 ** Login   <leandre.blanchard@epitech.eu>
 ** 
 ** Started on  Tue May 16 16:53:10 2017 Léandre Blanchard
-** Last update Fri May 19 19:11:05 2017 Léandre Blanchard
+** Last update Sat May 20 18:55:58 2017 Léandre Blanchard
 */
 
 #include "colors.h"
@@ -52,6 +52,30 @@ static void		init_curset(t_curset *curset, char **cmds)
   curset->s = my_calloc(2);
 }
 
+static int		add_char(t_curset *curset)
+{
+  static char		c[3] = "\0\0\0";
+
+  c[0] = c[1];
+  c[1] = c[2];
+  c[2] = curset->ch;
+  if (curset->i == NB_PTR && curset->ch != 3 && curset->ch != 4
+                     && curset->ch != 127 && curset->ch != 12
+      && curset->ch != 10 && curset->ch != 27 && curset->ch != 11)
+    {
+      if (my_strlen(curset->s) != 0 && curset->ch == 9)
+	return (call_completion(curset));
+      if (c[2] != 91 && c[1] != 27)
+	move_and_add(curset->s, curset->cur, curset->ch);
+      else
+	curset->s[my_strlen(curset->s)] = curset->ch;
+      curset->cur++;
+    }
+  if (curset->cur > my_strlen(curset->s))
+    curset->cur = my_strlen(curset->s);
+  return (0);
+}
+
 char			*get_cmd(char **cmds)
 {
   int			(*tab_ptr[NB_PTR]) (t_curset *);
@@ -71,15 +95,7 @@ char			*get_cmd(char **cmds)
 	curset.i++;
       if (curset.s == NULL)
 	return (NULL);
-      if (curset.i == NB_PTR && curset.ch != 3 && curset.ch != 4
-	       && curset.ch != 127 && curset.ch != 12
-	       && curset.ch != 10 && curset.ch != 27 && curset.ch != 11)
-	{
-	  curset.s[my_strlen(curset.s)] = curset.ch;
-	  curset.cur++;
-	}
-      if (curset.cur > my_strlen(curset.s))
-	curset.cur = my_strlen(curset.s);
+      add_char(&curset);
       if (alt_l(&curset) == 0)
 	return (strdup("ls"));
       print_cur(curset.cur, curset.s);

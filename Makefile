@@ -5,20 +5,26 @@
 ## Login   <TomicNikola@epitech.net>
 ##
 ## Started on  Sat Oct 15 19:37:46 2016 Nikola Tomic
-## Last update Fri May 19 17:43:48 2017 Léandre Blanchard
+## Last update Sun May 21 10:26:44 2017 
 ##
 
-CPPFLAGS	+= -I./include/ -g -g3
+CPPFLAGS	+= -I./include/
 
 LIB	= -L./my_printf -lmyprintf -lncurses
 
-CFLAGS	+= -Wall -Wextra
+CFLAGS	+= -Wall -Wextra -Werror
 
 SRC	= src/builtins.c		\
 	  src/find_path.c		\
+	  src/alias.c			\
 	  src/free.c			\
+	  src/move_and_add.c		\
+	  src/complete.c		\
 	  src/tab_append.c		\
 	  src/builtin_signal.c		\
+	  src/call_completion.c		\
+	  src/new_hist.c		\
+	  src/get_path.c		\
 	  src/cursor.c			\
 	  src/put_space.c		\
 	  src/basic_wordtab.c		\
@@ -58,8 +64,11 @@ SRC	= src/builtins.c		\
 	  src/shell.c			\
 	  src/clear.c			\
 	  src/echo.c			\
+	  src/fullfill_echo.c		\
 	  src/my_calloc.c		\
 	  src/42sh_history.c		\
+	  src/more_tools.c		\
+	  src/pipe.c			\
 	  src/main.c
 
 OBJ	= $(SRC:.c=.o)

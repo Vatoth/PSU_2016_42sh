@@ -5,17 +5,22 @@
 ** Login   <leandre.blanchard@epitech.eu>
 ** 
 ** Started on  Fri May 19 17:04:08 2017 Léandre Blanchard
-** Last update Fri May 19 17:40:55 2017 Léandre Blanchard
+** Last update Sat May 20 22:35:57 2017 Léandre Blanchard
 */
 
 #include "routine.h"
+#include "colors.h"
 
-void                    backspace(char *s)
+void                    backspace(void)
 {
   int                   i;
+  int			size;
+  struct winsize	win;
 
+  ioctl(1, TIOCGWINSZ, &win);
+  size = win.ws_col;
   i = 0;
-  while (i < my_strlen(s) + 10)
+  while (i < size)
     {
       write(1, " ", 1);
       i++;
@@ -33,7 +38,7 @@ int                     ret_back(t_curset *curset)
     return (1);
   if (my_strlen(curset->s) < 1)
     return (1);
-  curset->s[my_strlen(curset->s) - 1] = 0;
+  move_and_ret(curset->s, curset->cur);
   curset->cur = curset->cur - 1;
   return (0);
 }
@@ -77,8 +82,8 @@ void                    print_cur(int cur, char *s)
   int                   i;
 
   my_printf("\r");
+  backspace();
   disp_prompt();
-  backspace(s);
   my_printf("%s", s);
   i = my_strlen(s);
   while (i > 0)

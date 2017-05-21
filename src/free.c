@@ -5,12 +5,13 @@
 ** Login   <nikola@epitech.net>
 **
 ** Started on  Tue Apr 04 14:10:06 2017 nikola.tomic@epitech.eu
-** Last update Tue May 16 00:09:14 2017 
+** Last update Sun May 21 10:07:58 2017 
 */
 
 #include <stdlib.h>
 #include <unistd.h>
 #include "my.h"
+#include "routine.h"
 
 void	free_tab(char **tab)
 {
@@ -23,6 +24,27 @@ void	free_tab(char **tab)
 	free(tab[i++]);
       free(tab);
     }
+}
+
+void		free_alias(t_list_al *alias)
+{
+  t_alias	*tmp;
+  t_alias	*elem;
+
+  free_tab(alias->file);
+  elem = alias->first;
+  while (elem)
+    {
+      tmp = elem;
+      elem = elem->next;
+      if (tmp->cmd != NULL)
+	free(tmp->cmd);
+      if (tmp->alias != NULL)
+	free(tmp->alias);
+      free(tmp);
+    }
+  alias->first = NULL;
+  alias->last = NULL;
 }
 
 void		free_list(t_list *list)
@@ -59,4 +81,11 @@ void	free_tree(t_btree *tree)
 	}
       free(tree);
     }
+}
+
+void		free_tcomp(t_comp *str)
+{
+  free(str->start);
+  free(str->end);
+  free(str->new);
 }

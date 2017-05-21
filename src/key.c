@@ -5,7 +5,7 @@
 ** Login   <leandre.blanchard@epitech.eu>
 ** 
 ** Started on  Fri May 19 16:58:25 2017 Léandre Blanchard
-** Last update Fri May 19 17:33:00 2017 Léandre Blanchard
+** Last update Sat May 20 15:16:28 2017 Léandre Blanchard
 */
 
 #include "routine.h"
@@ -25,12 +25,7 @@ int                     up_key(t_curset *curset)
   if (keys[0] == 27 && keys[1] == '[' && keys[2] == 'A')
     {
       zeros(keys, 3);
-      while (curset->hist > 0 && strcmp(curset->s, curset->cmds[curset->hist]) == 0)
-	curset->hist--;
-      free(curset->s);
-      curset->s = strdup(curset->cmds[curset->hist--]);
-      if (curset->hist < 0)
-	curset->hist = 0;
+      new_hist(curset, -1);
       curset->cur = my_strlen(curset->s);
       return (0);
     }
@@ -54,16 +49,7 @@ int                     down_key(t_curset *curset)
       if (curset->cmds[0] == NULL)
 	return (1);
       zeros(keys, 3);
-      while (curset->hist < my_tablen(curset->cmds)
-	     && strcmp(curset->s, curset->cmds[curset->hist]) == 0)
-	curset->hist++;
-      free(curset->s);
-      curset->s = strdup(curset->cmds[curset->hist++]);
-      if (curset->hist >= my_tablen(curset->cmds))
-	{
-	  curset->hist = my_tablen(curset->cmds) - 1;
-	  zeros(curset->s, my_strlen(curset->s));
-	}
+      new_hist(curset, 1);
       curset->cur = my_strlen(curset->s);
       return (0);
     }
@@ -82,6 +68,8 @@ int                     left_key(t_curset *curset)
       shift_right(curset->s, 1);
       zeros(keys, 3);
       curset->cur -= 2;
+      if (curset->cur < 0)
+	curset->cur = 0;
       return (0);
     }
   return (1);

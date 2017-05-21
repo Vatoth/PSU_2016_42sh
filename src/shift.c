@@ -5,9 +5,10 @@
 ** Login   <leandre.blanchard@epitech.eu>
 ** 
 ** Started on  Mon Apr  3 18:54:59 2017 Léandre Blanchard
-** Last update Sun May 14 21:47:57 2017 Léandre Blanchard
+** Last update Sun May 21 10:23:52 2017 
 */
 
+#include <stdlib.h>
 #include "my.h"
 
 void		shift_left(char *s, int nb)
@@ -16,6 +17,10 @@ void		shift_left(char *s, int nb)
   int		status;
 
   status = 0;
+  if (my_strlen(s) < nb)
+    nb = my_strlen(s);
+  if (s == NULL)
+    return;
   while (status != nb)
     {
       i = 0;
@@ -30,7 +35,10 @@ void		shift_left(char *s, int nb)
 
 void		shift_right(char *s, int nb)
 {
-  my_revstr(s);
-  shift_left(s, nb);
-  my_revstr(s);
+  if (s != NULL)
+    {
+      my_revstr(s);
+      shift_left(s, nb);
+      my_revstr(s);
+    }
 }

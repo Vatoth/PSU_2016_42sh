@@ -5,7 +5,7 @@
 ** Login   <nikola@epitech.net>
 **
 ** Started on  Tue Apr 04 14:19:19 2017 nikola.tomic@epitech.eu
-** Last update Tue May 16 15:17:43 2017 nikola.tomic@epitech.eu
+** Last update Sat May 20 17:56:27 2017 
 */
 
 #include <unistd.h>
@@ -35,21 +35,4 @@ char	*find_path(t_list *dupenvp, char *cmd)
       i += 1;
     }
   return (NULL);
-}
-
-void	my_heredoc(int pp[2], char *file)
-{
-  char	*line;
-
-  while ((line = get_next_line(0)))
-    {
-      if (my_strcmp(file, line) == 0)
-        break;
-      write(pp[1], line, my_strlen(line));
-      write(pp[1], "\n", 1);
-      free(line);
-    }
-  close(pp[0]);
-  close(pp[1]);
-  exit(0);
 }

@@ -5,7 +5,7 @@
 ** Login   <leandre.blanchard@epitech.eu>
 ** 
 ** Started on  Wed May 17 18:09:04 2017 Léandre Blanchard
-** Last update Fri May 19 19:31:04 2017 Léandre Blanchard
+** Last update Sat May 20 14:42:39 2017 Léandre Blanchard
 */
 
 #ifndef SH_HISTORY_H_
@@ -31,6 +31,7 @@ typedef struct  s_tab
   int           k;
 }               t_tab;
 
+char		*get_path(const char *filename);
 char		**basic_wordtab(const char *s, int no);
 char		*my_calloc(int size);
 char		**my_str_to_wordtab(const char *s, int no);

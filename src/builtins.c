@@ -5,7 +5,7 @@
 ** Login   <nikola@epitech.net>
 **
 ** Started on  Tue Apr 04 12:44:19 2017 nikola.tomic@epitech.eu
-** Last update Thu May 18 11:49:18 2017 
+** Last update Sun May 21 10:17:36 2017 
 */
 
 #include <unistd.h>
@@ -86,7 +86,8 @@ int	my_cd(t_list **dupenvp, char *arg)
   return (0);
 }
 
-int		builtins(char *cmd, t_list **dupenvp, int *ret)
+int		builtins(char *cmd, t_env *my_env,
+			 t_list_al *alias)
 {
   char		**args;
   wordexp_t	p;
@@ -96,20 +97,25 @@ int		builtins(char *cmd, t_list **dupenvp, int *ret)
   if (my_strcmp(args[0], "exit") == 0)
     {
       wordfree(&p);
-      free_list(*dupenvp);
-      exit(*ret);
+      free_list(my_env->env);
+      free_alias(alias);
+      exit(my_env->ret);
     }
   else if (my_strcmp(args[0], "env") == 0)
-    display_list(*dupenvp);
+    display_list(my_env->env);
   else if (my_strcmp(args[0], "setenv") == 0)
-    *ret = my_setenv(dupenvp, args[1], args[2]);
+    my_env->ret = my_setenv(&(my_env->env), args[1], args[2]);
   else if (my_strcmp(args[0], "unsetenv") == 0)
-    my_unsetenv(dupenvp, args[1]);
+    my_unsetenv(&(my_env->env), args[1]);
   else if (my_strcmp(args[0], "cd") == 0)
-    *ret = my_cd(dupenvp, args[1]);
+    my_env->ret = my_cd(&(my_env->env), args[1]);
+  else if (my_strcmp(args[0], "alias") == 0 && (args[1] != NULL))
+    my_env->ret = add_alias(alias, args[1], args[2]);
+  else if (my_strcmp(args[0], "unalias") == 0)
+    unalias(alias, args[1]);
   else if (args[1] != NULL && my_strcmp(args[0], "echo") == 0
 	   && my_strcmp(args[1], "$?") == 0)
-    my_printf("%d\n", *ret);
+    my_printf("%d\n", my_env->ret);
   else if (my_strcmp(args[0], "echo") == 0)
     my_echo(cmd);
   else

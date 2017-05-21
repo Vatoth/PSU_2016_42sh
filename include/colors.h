@@ -5,14 +5,14 @@
 ** Login   <lblanchard@epitech.net>
 ** 
 ** Started on  Sun Dec  4 21:37:44 2016 Leandre Blanchard
-** Last update Tue May  2 12:28:40 2017 Léandre Blanchard
+** Last update Sat May 20 22:35:19 2017 Léandre Blanchard
 */
 
 #ifndef COLORS_H_
 # define COLORS_H_
 
-# define CLEAR "\033[3;"
-# define CLEARTOP	"\033[3;J\033[H\033[2J$"
+# define CLEAR "\033[2J"
+# define CLEARTOP	"\033[H\033[2J$"
 # define RESET   "\033[0m"
 # define BLACK   "\033[30m"
 # define RED     "\033[31m"
