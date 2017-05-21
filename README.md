@@ -29,7 +29,7 @@ make
 • separators: ’;’, ’&&’, ’||’
 • history
 • alias unalias
-• inhibitors (’\’)
+• inhibitors (’\’, '"', ''')
 • globbings (’*’, ’?’, ’[’, ’]’)
 • line edition (multiline, dynamic rebinding, auto-completion dynamic
 • backticks (’‘’)
