@@ -49,7 +49,7 @@ make
 
 * **Nikola Tomic** - *Initial work with redirections, pipes, cd, execution and environnement* - [Pujomir](https://github.com/Pujomir)
 * **Léandre Blanchard** - *Line editing, history, auto-completion dynamic and tools library* - [LeandreBL](https://github.com/LeandreBl)
-* **Antoine Le Dû** - *Builtins echo and help for global parsing* -
+* **Antoine Le Dû** - *Builtins echo and help for global parsing* - [Sezny](https://github.com/sezny)
 * **Quentin Sonnefraud** -*Globbings, inihibitors, logical operator '&&' '||' and aliases* - [Vatoth](https://github.com/Vatoth)
 
 Made with love at Epitech Paris in 2017
