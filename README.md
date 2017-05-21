@@ -36,7 +36,7 @@ make
 ```
 ## Authors
 
-* **Nikola Tomik** - *Initial work with redirections, pipes, ,cd, execution and environnement* - [Pujomir](https://github.com/Pujomir)
+* **Nikola Tomik** - *Initial work with redirections, pipes, cd, execution and environnement* - [Pujomir](https://github.com/Pujomir)
 * **Léandre Blanchard** - *Line edition and History and tools library* - [LeandreBL](https://github.com/LeandreBl)
 * **Antoine Le Dû** - *Builtins echo and help for global parsing* -
 * **Quentin Sonnefraud** -*globbings, inihibitors, logical operator '&&' '||' and aliases* - [Vatoth](https://github.com/Vatoth)
