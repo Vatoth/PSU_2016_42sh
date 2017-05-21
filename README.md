@@ -7,7 +7,7 @@ A shell like TCSH made at Epitech in 2017
 What things you need to install the 42sh
 
 ```
-GlibC, gcc and ncurses
+Any terminal, GlibC and GCC
 ```
 
 ### Installing
@@ -36,7 +36,7 @@ make
 ```
 ## Authors
 
-* **Nikola Tomik** - *Initial work with redirections, pipes, cd, execution and environnement* - [Pujomir](https://github.com/Pujomir)
+* **Nikola Tomic** - *Initial work with redirections, pipes, cd, execution and environnement* - [Pujomir](https://github.com/Pujomir)
 * **Léandre Blanchard** - *Line editing, history, auto-completion dynamic and tools library* - [LeandreBL](https://github.com/LeandreBl)
 * **Antoine Le Dû** - *Builtins echo and help for global parsing* -
 * **Quentin Sonnefraud** -*Globbings, inihibitors, logical operator '&&' '||' and aliases* - [Vatoth](https://github.com/Vatoth)
