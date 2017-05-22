@@ -53,6 +53,6 @@ make
 * **Léandre Blanchard** - *Line editing, history, auto-completion dynamic and tools library* - [LeandreBL](https://github.com/LeandreBl)
 * **Antoine Le Dû** - *Builtins echo and help for global parsing* - [Sezny](https://github.com/sezny)
 * **Quentin Sonnefraud** -*Globbings, inihibitors, logical operator '&&' '||' and aliases* - [Vatoth](https://github.com/Vatoth)
-* **William Choukroun** - *Project Manager and Communication Leader and best gosth EVER !* - 
+* **William Choukroun** - *Project Manager and Communication Leader and best ghost EVER !* - 
 
 Made with love at Epitech Paris in 2017
