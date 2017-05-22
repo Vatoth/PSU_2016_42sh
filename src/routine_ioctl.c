@@ -60,6 +60,8 @@ static int		add_char(t_curset *curset)
   c[0] = c[1];
   c[1] = c[2];
   c[2] = curset->ch;
+  if (curset->cur < 0)
+    curset->cur = 0;
   if (curset->i == NB_PTR && curset->ch != 3 && curset->ch != 4
                      && curset->ch != 127 && curset->ch != 12
       && curset->ch != 10 && curset->ch != 27 && curset->ch != 11)
